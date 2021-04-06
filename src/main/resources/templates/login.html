@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- is ka content replace krnaa h base.html file mei -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Login Page</title>
+</head>
+<body>
+	<section class="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<div class="my-card mt-5">
+					
+						<div class="container text-center">
+							<img class="mx-auto" style="width: 40px" alt="" src=""
+								th:src="@{/img/icon.jpg}">
+						</div>
+						<h1 class="text-center">LOG IN HERE!</h1>
+							<div class="mb-3">
+						  <form class="form-signin" method="post" th:action="@{/dologin}">
+						  
+	<div th:if="${param.error}" class="alert alert-danger">Invalid Email and Password</div>
+	<div th:if="${param.Layout}" class="alert alert-success">You have been logged out</div>
+	
+	<div th:if="${param.change}" class="alert alert-success"><p th:text="${param.change}"> </p></div>
+        <p>
+          <label for="username" class="sr-only">Email</label>
+          <input type="text" id="username" name="username" class="form-control" placeholder="Email" required autofocus>
+        </p>
+        
+        <p>
+          <label for="password" class="sr-only">Password</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        </p>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <br>
+          <div class="container text-center">
+       <strong><a th:href="@{/signup}">New User Register Here</a></strong> 
+        </div>
+        <div class="container text-center">
+       <strong><a th:href="@{/forgot}">Forgot Password</a></strong> 
+        </div>
+        
+      </form>
+					</div>
+				</div>
+			</div>
+		</div>
+			</div>
+	</section>
+
+</body>
+</html>

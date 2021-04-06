@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>SIGN UP Page</title>
+</head>
+<body>
+	<!-- that sectn will send to base.html -->
+	<section class="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<div class="my-card mt-1"> 
+					<!--final rslt  mesg show ho  -->
+<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert"> <!-- msg ka cntnt typ -->
+		<p class="text-center" th:text="${session.message.content}"></p> <!-- msg ka cntnt  -->
+		<th:block th:text="${#session.removeAttribute('message')}"></th:block></div> <!-- //1 hi br dikhe -->
+		
+						<div class="container text-center">
+							<img class="mx-auto" style="width: 40px" alt="" src=""
+								th:src="@{/img/icon.jpg}">
+						</div>
+						<h1 class="text-center">SIGN UP HERE!</h1>
+<form enctype="multipart/form-data" th:action="@{/do_register}" method="post" th:object="${user}"> <!-- user vrbl  -->
+							<div class="mb-3">
+								<label for="name_filed" class="form-label">Your Name</label> <input
+									name="name" type="text" class="form-control" th:classappend="${#fields.hasErrors('name')? 'is-invalid':''}" id="name_filed"
+									aria-describedby="emailHelp" placeholder="Enter here"
+									required="required" th:value="${user.name}"> <!-- //user me name bhja h to autmcly dikhne lgega -->
+				<div class="invalid-feedback" th:each="e: ${#fields.errors('name')}" th:text="${e}"></div>
+									 <br>
+								<label for="email_filed" class="form-label">Your Email</label> <input
+									name="email" type="email" class="form-control" id="email_filed"
+									aria-describedby="emailHelp" placeholder="Enter here"
+									required="required" th:value="${user.email}"> 
+									<br>
+								<label for="password_filed" class="form-label">Your password</label> <input name="password" type="password"
+									class="form-control" id="password_filed"
+									aria-describedby="emailHelp" placeholder="Enter here"
+									required="required"> 
+									<br>
+									
+								<div class="form-group"><textarea name="about" th:text="${user.about}"
+										placeholder="Enter someting about yourself" rows="2" cols="30"
+										class="form-control" th:value="${user.about}"></textarea>
+								</div>
+								<br>
+		<div class="form-group"> <input type="file" name="profileimage"></div>
+<br>
+								<div class="form-group form-check">
+									<input type="checkbox" name="agreement"
+										class="form-check-input" id="agreement" /> <label
+										for="agreement">Accept terms and conditions</label>
+								</div>
+								<br>
+								<div class="container text-center">
+									<button type="submit" class="btn bg-primary text-white">Submit</button>
+									<button type="reset" class="btn btn-warning text-white">Reset</button>
+								</div>
+								<bR>
+								
+								   <div class="container text-center">
+       <strong><a th:href="@{/loginto}">If Already Register Click to login</a></strong> 
+        </div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

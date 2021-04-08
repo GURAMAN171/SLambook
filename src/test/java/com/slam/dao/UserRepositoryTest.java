@@ -29,9 +29,12 @@ public class UserRepositoryTest {
 	  public void testCreateUser() 
 	  {
 		  User user=new User();
-	  user.setEmail("Junittest@gmail.com");
-	  user.setPassword("Jtesttt20");
-	  user.setName("JTEstttst");
+	  user.setEmail("FFinltest20@gmail.com");
+	  user.setPassword("Finltest20");
+	  user.setName("Finltest20");
+	  user.setAbout("FINAL TESTING");
+	  user.setImage("default.png");
+	  user.setRole("ROLE_USER");
 	  user.setEnabled(true); 
 	  User savedUser =repo.save(user); 
 	  User existUser =entityManager.find(User.class, savedUser.getId());
@@ -60,16 +63,20 @@ public class UserRepositoryTest {
 	  @Order(4)
 	  @Rollback(false)
 	  public void testUpdateUser() {
-	      User u = repo.getUserByUserEmail("Shehnaz123@gmail.com");
-	      u.setName("Shehnaaz Gill");
+	      User u = repo.getUserByUserEmail("Junittest@gmail.com");
+	      u.setName("UPdttst12@");
+		  u.setPassword("UPdttst12@");
+		  u.setAbout("UPdttst12@");
+		  u.setImage("default.png");
+		  u.setRole("ROLE_USER");
 	       
 	      repo.save(u);
 	       
-	     User updatedUser = repo.getUserByUserEmail("Shehnaz123@gmail.com");
+	     User updatedUser = repo.getUserByUserEmail("Junittest@gmail.com");
 	       
-	      assertThat(updatedUser.getName()).isEqualTo("Shehnaaz Gill");
+	      assertThat(updatedUser.getName()).isEqualTo("UPdttst12@");
 	  }
-	
+	  
 	  @Test
 	  @Order(5)
 	  @Rollback(false)
@@ -83,5 +90,6 @@ public class UserRepositoryTest {
 	    assertThat(deletedUser).isEmpty();      
 	     
 	}
+	
 
 }

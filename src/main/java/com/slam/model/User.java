@@ -12,7 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity //class is an entity and is mapped to a database table
@@ -22,13 +25,17 @@ public class User //encapsullate dat fields into class
 	@Id // specify primary key of entity
 	@GeneratedValue(strategy=GenerationType.AUTO)  // id is autognrtd (strategy for generating)
 private int id;	//set private so that cannt be acesbl
+	
 	@NotBlank(message="Name should not be blanked!")  //java srvr side vldnt cnstrnt
 	@Size(min=2,max=20,message="Min 2 & Max 20 characters are allowed!")
 private String name; 
-@Column(unique = true)
+	
+@Pattern(regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$",message = "Invalid Email!!")
 private String email;
 private String password;
 private String role;
+
+@AssertTrue(message="Must Agreed terms and conditions")
 private boolean enabled;
 private String image;
 @Column(length=500)

@@ -28,14 +28,14 @@ import com.slam.dao.UserRepository;
 import com.slam.helper.*;
 import com.slam.model.User;
 
-@Controller  //mrk class as container
+@Controller  //indicates that the annotated class is a controller/ It marks a class as a web request handler.
 public class HomeController {
 	
 	@Autowired		//enbl us to inject objct dependency implicity
 	private BCryptPasswordEncoder PasswordEncoder;
 	
 	//to get  the object
-	@Autowired
+	@Autowired // the spring container auto-wires the bean by matching data-type.
 	private UserRepository userRepository;
 	/*
 	 * for testing
@@ -52,12 +52,12 @@ public class HomeController {
 	 *  return "Working"; }
 	 */
 	@RequestMapping("/") 	//used for mapping web reqst onto handler method in reqst hndling classes /mthds
-		public String home(Model model)
+		public String home(Model model)				//attributes used for rendering views
 		{
 			model.addAttribute("title","Home - Slam Book");
 			return "home";
 		}
-	@RequestMapping("/about")
+	@RequestMapping("/about") //By default, it returns a string that indicates which route to redirect
 	public String about(Model model)
 	{
 		model.addAttribute("title","About - Slam Book");
@@ -74,16 +74,16 @@ public class HomeController {
 	
 	//handler for rgstrng user
 	@RequestMapping(value="/do_register",method=RequestMethod.POST ) 
-	public String registerUser(@Valid @ModelAttribute("user")User user, @RequestParam("profileimage") MultipartFile file, BindingResult result1,@RequestParam(value="agreement",defaultValue="false")boolean agreement,Model model,HttpSession session)
+	public String registerUser(@Valid @ModelAttribute("user") User user, //map a form's inputs to a bean & bean used is validated
+			BindingResult result1,
+			@RequestParam("profileimage") MultipartFile file, 
+			Model model,
+			HttpSession session)
 
 	{
 		try
 		{
-			if(!agreement)		//if not agreedd
-			{
-				System.out.println("Not agreed terms and conditions"); 
-				throw new Exception("Not agreed terms and conditions");
-			}
+			
 			if (result1.hasErrors()) /* srvr side vldtn */
 			{
 				System.out.println("ERROR"+result1.toString());
@@ -111,7 +111,6 @@ public class HomeController {
 			}
 			
 			//--------------------
-			System.out.println("Agreement:" +agreement);
 			System.out.println("User:" +user);
 			
 

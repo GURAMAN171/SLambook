@@ -13,7 +13,7 @@ public class EmailService {
 	public boolean sendEmail(String subject,String message,String to)
 	{
 		boolean f=false;
-		String from="gur*****@gmail.com";
+		String from="hgdfbmd@gmail.com";
 		
 		//variable for gmail
 		String host="smtp.gmail.com";
@@ -34,7 +34,7 @@ public class EmailService {
 		@Override
 		protected PasswordAuthentication getPasswordAuthentication()
 		{
-			return new PasswordAuthentication("guram****@gmail.com", "******");
+			return new PasswordAuthentication("cdjfvnbsc@gmail.com", "fhgfbhbd%");
 		}
 		
 		});

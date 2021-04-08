@@ -22,7 +22,7 @@
 								th:src="@{/img/icon.jpg}">
 						</div>
 						<h1 class="text-center">SIGN UP HERE!</h1>
-<form enctype="multipart/form-data" th:action="@{/do_register}" method="post" th:object="${user}"> <!-- user vrbl  -->
+<form novalidate="novalidate" enctype="multipart/form-data" th:action="@{/do_register}" method="post" th:object="${user}"> <!-- user vrbl  -->
 							<div class="mb-3">
 								<label for="name_filed" class="form-label">Your Name</label> <input
 									name="name" type="text" class="form-control" th:classappend="${#fields.hasErrors('name')? 'is-invalid':''}" id="name_filed"
@@ -31,12 +31,13 @@
 				<div class="invalid-feedback" th:each="e: ${#fields.errors('name')}" th:text="${e}"></div>
 									 <br>
 								<label for="email_filed" class="form-label">Your Email</label> <input
-									name="email" type="email" class="form-control" id="email_filed"
+									name="email" type="email" class="form-control" th:classappend="${#fields.hasErrors('email')? 'is-invalid':''}" id="email_filed"
 									aria-describedby="emailHelp" placeholder="Enter here"
 									required="required" th:value="${user.email}"> 
+									<div class="invalid-feedback" th:each="e: ${#fields.errors('email')}" th:text="${e}"></div>
 									<br>
 								<label for="password_filed" class="form-label">Your password</label> <input name="password" type="password"
-									class="form-control" id="password_filed"
+							class="form-control" id="password_filed"
 									aria-describedby="emailHelp" placeholder="Enter here"
 									required="required"> 
 									<br>
@@ -49,9 +50,12 @@
 		<div class="form-group"> <input type="file" name="profileimage"></div>
 <br>
 								<div class="form-group form-check">
-									<input type="checkbox" name="agreement"
-										class="form-check-input" id="agreement" /> <label
-										for="agreement">Accept terms and conditions</label>
+									<input type="checkbox" name="enabled"
+										class="form-check-input" th:classappend="${#fields.hasErrors('enabled')? 'is-invalid':''}"  id="enabled" /> <label
+										for="enabled">Accept terms and conditions</label>
+										
+											<div class="invalid-feedback" th:each="e: ${#fields.errors('enabled')}" th:text="${e}"></div>
+									 <br>
 								</div>
 								<br>
 								<div class="container text-center">

@@ -12,9 +12,9 @@ public class UserDtlSrvcImp implements UserDetailsService {
 	@Autowired
 private UserRepository userRepository;
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		//fetching user from database
-		User user=userRepository.getUserByUserEmail(username);
+		User user=userRepository.getUserByUserEmail(email);
 		if(user==null)
 		{
 			throw new UsernameNotFoundException("COULD NOT FOUND USER");

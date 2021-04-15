@@ -29,48 +29,50 @@
 							<tbody>
 								<tr th:each="f : ${friends}">
 									<th scope="row" th:text="${'SB2021'+f.fId}">>1</th>
-									
-									<td>
-									<img src=""  class="myprofile" th:src="@{'/img/'+${f.image}}"  alt="Pic"/>
-									<a href="#" th:href="@{'/user/'+${f.fId}+'/friends/'}">
-									<span th:text="${f.name}"></span>
-									</a>
-									</td>
-									
+
+									<td><img src="" class="myprofile"
+										th:src="@{'/img/'+${f.image}}" alt="Pic" /> <a href="#"
+										th:href="@{'/user/'+${f.fId}+'/friends/'}"> <span
+											th:text="${f.name}"></span>
+									</a></td>
+
 									<td th:text="${f.secondName}"></td>
 									<td th:text="${f.email}"></td>
 									<td th:text="${f.phone}"></td>
 									<td>
-									
-									<form th:action="@{'/user/opnupdtform/'+${f.fId}}" method="post">
-		<button type="submit" class="btn btn-primary btn-sm">Update</button> <!-- post request -->
-		</form>
-		<br>
-									
-	      	<!-- <a th:href ="@{'/user/delete/'+${f.fId}}" class="btn btn-danger btn-sm">Delete</a> -->
-		<a href=# th:onclick="|deleteFriend(${f.fId})|" class="btn btn-danger btn-sm">Delete</a>  <!--get request -->
+										<!-- ----------------------------------------------------------------- -->
+										<form th:action="@{'/user/opnupdtform/'+${f.fId}}"
+											method="post">
+											<button type="submit" class="btn btn-primary btn-sm">Update</button>
+											<!-- post request -->
+										</form> 
+										<!-- ----------------------------------------------------------------- -->
+										<br> 
+										<a href=# th:onclick="|deleteFriend(${f.fId})|"
+										class="btn btn-danger btn-sm">Delete</a> <!--get request -->
 									</td>
 								</tr>
 
 							</tbody>
 						</table>
 						<!-- ---------------------my table------------------- -->
-
-
+						
 						<!-- @static $dynmic -->
 						<!-- ---------------------Pagination------------------- -->
 						<nav aria-label="Page navigation example">
 							<ul class="pagination">
-								<li th:if="${currentPage != 0}" class="page-item">
-								<a th:href="@{'/user/showfriends/'+${currentPage-1}}" class="page-link"
-									href="#">Previous</a></li>
+								<li th:if="${currentPage != 0}" class="page-item"><a
+									th:href="@{'/user/showfriends/'+${currentPage-1}}"
+									class="page-link" href="#">Previous</a></li>
 								<li th:classappend="${currentPage==i-1?'active':''}"
 									th:each="i : ${#numbers.sequence(1,totalPages)}"
-									class="page-item">
-									<a th:href="@{'/user/showfriends/'+${i-1}}" class="page-link"
+									class="page-item"><a
+									th:href="@{'/user/showfriends/'+${i-1}}" class="page-link"
 									href="#"><span th:text="${i}"></span></a></li>
 								<li th:if="${currentPage+1 != totalPages}" class="page-item">
-								<a th:href="@{'/user/showfriends/'+${currentPage+1}}" class="page-link" href="#">Next</a></li>
+									<a th:href="@{'/user/showfriends/'+${currentPage+1}}"
+									class="page-link" href="#">Next</a>
+								</li>
 							</ul>
 						</nav>
 						<!-- ---------------------Pagination------------------- -->
@@ -78,10 +80,7 @@
 				</div>
 			</div>
 		</div>
-
-
 	</section>
-
 </body>
 </html>
 

@@ -23,17 +23,16 @@ public class OurUserDetails implements UserDetails
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		SimpleGrantedAuthority simpleGrantedAuthority=new SimpleGrantedAuthority(user.getRole());
-		return List.of(simpleGrantedAuthority);
+	    return Collections.singleton(new SimpleGrantedAuthority(user.getRole()));	 
 	}
 
 	@Override
 	public String getPassword() {
-		return user.getPassword(); //pswrd extrct kra
+		return user.getPassword(); 
 	}
 
-	@Override /* eml is our usrnm  */
-	public String getUsername()  { //email extrct kra
+	@Override 
+	public String getUsername()  { 
 		return user.getEmail();
 		
 	}

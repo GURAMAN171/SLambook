@@ -14,57 +14,60 @@
 					<div class="my-card mt-0" th:if=${friends}>
 						<h1 class="text-center">YOUR FRIENDS PROFILE</h1>
 						<div class="container text-center">
-									<img src="" style="height:180px; width:180px " class="myprofile" th:src="@{'/img/'+${friends.image}}"  alt="Pic"/>
-						<h3 class="mt-1" th:text="${friends.name}"></h3>
+							<img src="" style="height: 180px; width: 180px" class="myprofile"
+								th:src="@{'/img/'+${friends.image}}" alt="Pic" />
+							<h3 class="mt-1" th:text="${friends.name}"></h3>
 						</div>
-						
+
+						<!-- -------------------------------table start---------------------------------- -->
 						<table class="table table-borderless table-dark">
-  <thead>
-    <tr>
-      <th scope="col">#ID</th>
-      <th scope="col">SBUSER<span th:text="${friends.fId}"></span></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Email</th>
-      <td><span th:text="${friends.email}"></span></td>
-    </tr>
-    
-     <tr>
-      <th scope="row">Phone</th>
-      <td><span th:text="${friends.phone}"></span></td>
-    </tr>
-    
-     <tr>
-      <th scope="row">Work</th>
-      <td><span th:text="${friends.work}"></span></td>
-    </tr>
-    
-     <tr>
-      <th scope="row">Address</th>
-      <td><span th:text="${friends.address}"></span></td>
-    </tr>
-  </tbody>
-</table>
+							<thead>
+								<tr>
+									<th scope="col">#ID</th>
+									<th scope="col">SBUSER<span th:text="${friends.fId}"></span></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">Email</th>
+									<td><span th:text="${friends.email}"></span></td>
+								</tr>
 
+								<tr>
+									<th scope="row">Phone</th>
+									<td><span th:text="${friends.phone}"></span></td>
+								</tr>
 
-  <div class="descr text-center">
-  <th:block th:utext="${friends.descr}"></th:block>
-  </div>
-  <div class="container mt-1">
- 				<form th:action="@{'/user/opnupdtform/'+${friends.fId}}" method="post">
-		<button type="submit" class="btn btn-warning btn-sm">Update</button> <!-- post request -->
-		</form>
-		 </div>
- <div class="container mt-2">
-										 <button th:onclick="|deleteFriend(${friends.fId})|" class="btn btn-danger btn-sm">Delete</button>
- </div>
-  
-  
-		
-					<h1 th:unless="${friends}">YOU DONT HAVE PERMISSION TO ACCESS....</h1>
-  
+								<tr>
+									<th scope="row">Work</th>
+									<td><span th:text="${friends.work}"></span></td>
+								</tr>
+
+								<tr>
+									<th scope="row">Address</th>
+									<td><span th:text="${friends.address}"></span></td>
+								</tr>
+							</tbody>
+						</table>
+						<!-- ------------------------------table end----------------------------------- -->
+
+						<div class="descr text-center">
+							<th:block th:utext="${friends.descr}"></th:block>
+						</div>
+						<div class="container mt-1">
+							<form th:action="@{'/user/opnupdtform/'+${friends.fId}}"
+								method="post">
+								<button type="submit" class="btn btn-warning btn-sm">Update</button>
+								<!-- post request -->
+							</form>
+						</div>
+						<div class="container mt-2">
+							<button th:onclick="|deleteFriend(${friends.fId})|"
+								class="btn btn-danger btn-sm">Delete</button>
+						</div>
+						<h1 th:unless="${friends}">YOU DONT HAVE PERMISSION TO
+							ACCESS....</h1>
+
 					</div>
 				</div>
 			</div>

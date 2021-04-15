@@ -10,51 +10,42 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@Configuration //as we are  declring lot of beans
-@EnableWebSecurity
-public class MyConfig extends WebSecurityConfigurerAdapter
-{
+@Configuration
+public class MyConfig extends WebSecurityConfigurerAdapter {
 	@Bean
-	public UserDetailsService getUserDetailsService()
-	{
+	public UserDetailsService getUserDetailsService() {
 		return new UserDtlSrvcImp();
 	}
+
 	@Bean
-	public BCryptPasswordEncoder passwordEncoder()
-	{
+	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+
 	@Bean
-	public DaoAuthenticationProvider authenticationProvider()
-	{
-	DaoAuthenticationProvider daoAuthenticationProvider=new DaoAuthenticationProvider();
+	public DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
 		daoAuthenticationProvider.setUserDetailsService(this.getUserDetailsService());
 		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
 		return daoAuthenticationProvider;
 	}
-	//configure method
-	
-	
+
+	// Configure method
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-	auth.authenticationProvider(authenticationProvider());
-	
+		auth.authenticationProvider(authenticationProvider());
+
 	}
-	
-	//btayga sare route authorise na kro
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				/* .antMatchers("/admin/**").hasRole("ADMIN") */
-		.antMatchers("/user/**").hasRole("USER")			//jitne url user k bad ayng can be accessible only by one who have role as user
-		.antMatchers("/**").permitAll().and().formLogin()	//rest urls are accessible
-		
-		.loginPage("/loginto") 								//url page too sign in opn login page
-		.loginProcessingUrl("/dologin") 					// jst url to sbmit usernm or pswrd ..URL to validate username and password
-		.defaultSuccessUrl("/user/index") 					// if successfull go to this url and opn dashboard of user
-		
-		.and().csrf().disable();
-		
+		http.authorizeRequests().antMatchers("/user/**").hasRole("USER").antMatchers("/**").permitAll().and()
+				.formLogin()
+
+				.loginPage("/loginto").loginProcessingUrl("/dologin").defaultSuccessUrl("/user/index")
+
+				.and().csrf().disable();
+
 	}
-	
+
 }

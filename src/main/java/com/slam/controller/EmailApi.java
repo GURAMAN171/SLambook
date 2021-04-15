@@ -14,27 +14,22 @@ import com.slam.service.EmailService;
 public class EmailApi {
 	@Autowired
 	private EmailService emailService;
+
 	@RequestMapping("/welcome")
-	public String welcome()
-	{
+	public String welcome() {
 		return "hy this is email api";
 	}
-	
-	//api to send email
-	@RequestMapping(value = "/sendemail",method = RequestMethod.POST)
-		public ResponseEntity<?> sendEmail(@RequestBody EmailRequest request)
-		{
+
+	// API used to send email
+	@RequestMapping(value = "/sendemail", method = RequestMethod.POST)
+	public ResponseEntity<?> sendEmail(@RequestBody EmailRequest request) {
 		System.out.println(request);
-		boolean result=this.emailService.sendEmail(request.getSubject(),request.getMessage(),request.getTo());
-		if(result)
-		{
+		boolean result = this.emailService.sendEmail(request.getSubject(), request.getMessage(), request.getTo());
+		if (result) {
 			return ResponseEntity.ok("Email snd succesfully");
-		}else
-		{
+		} else {
 			return ResponseEntity.ok("some error");
 		}
-		
-		
-		}
+	}
 
 }

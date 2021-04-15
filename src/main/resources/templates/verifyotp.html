@@ -11,11 +11,10 @@
 			<div class="row">
 				<div class="col-md-6 offset-md-3">
 					<div class="my-card mt-5">
-						
-						<div class="alert alert-success" role="alert">
-						We have sent OTP to your Registered Email
-						</div>
-						
+
+						<div class="alert alert-success" role="alert">We have sent
+							OTP to your Registered Email</div>
+
 						<!-- -----------mesgbox------------- -->
 						<div th:if="${session.message}" class="container">
 							<div class="alert alert-danger my-2 text-center" role="alert">
@@ -24,11 +23,11 @@
 							<th:block th:text="${#session.removeAttribute('message')}"></th:block>
 						</div>
 						<!-- -----------mesgbox------------- -->
-						
+
 						<form method="post" action="" th:action="@{/verify}">
 							<div class="form-group">
-								<input name="otp" required="required" type="text" placeholder="Enter your OTP here"
-									class="form-control">
+								<input name="otp" required="required" type="text"
+									placeholder="Enter your OTP here" class="form-control">
 							</div>
 							<br>
 							<div class="container text-center">

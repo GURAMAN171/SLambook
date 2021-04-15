@@ -9,86 +9,103 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="FRIENDS")
+@Table(name = "FRIENDS")
 public class Friends {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-private int fId;
-private String name;
-private String secondName;
-private String work;
-private String email;
-private String phone;
-private String address;
-private String image;
-@Column(length=1000)
-private String descr;
-public int getfId() {
-	return fId;
-}
-public void setfId(int fId) {
-	this.fId = fId;
-}
-public String getName() {
-	return name;
-}
-public void setName(String name) {
-	this.name = name;
-}
-public String getSecondName() {
-	return secondName;
-}
-public void setSecondName(String secondName) {
-	this.secondName = secondName;
-}
-public String getWork() {
-	return work;
-}
-public void setWork(String work) {
-	this.work = work;
-}
-public String getEmail() {
-	return email;
-}
-public void setEmail(String email) {
-	this.email = email;
-}
-public String getPhone() {
-	return phone;
-}
-public void setPhone(String phone) {
-	this.phone = phone;
-}
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int fId;
+	private String name;
+	private String secondName;
+	private String work;
+	private String email;
+	private String phone;
+	private String address;
+	private String image;
+	@Column(length = 1000)
+	private String descr;
 
-public String getAddress() {
-	return address;
-}
-public void setAddress(String address) {
-	this.address = address;
-}
-public String getImage() {
-	return image;
-}
-public void setImage(String image) {
-	this.image = image;
-}
-public String getDescr() {
-	return descr;
-}
-public void setDescr(String descr) {
-	this.descr = descr;
-}
+	public int getfId() {
+		return fId;
+	}
 
-@ManyToOne
-private User user;
+	public void setfId(int fId) {
+		this.fId = fId;
+	}
 
-public User getUser() {
-	return user;
-}
-public void setUser(User user) {
-	this.user = user;
-}
+	public String getName() {
+		return name;
+	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSecondName() {
+		return secondName;
+	}
+
+	public void setSecondName(String secondName) {
+		this.secondName = secondName;
+	}
+
+	public String getWork() {
+		return work;
+	}
+
+	public void setWork(String work) {
+		this.work = work;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getDescr() {
+		return descr;
+	}
+
+	public void setDescr(String descr) {
+		this.descr = descr;
+	}
+
+	@ManyToOne
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 }

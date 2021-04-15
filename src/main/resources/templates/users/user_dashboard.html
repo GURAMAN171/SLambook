@@ -12,42 +12,40 @@
 			<div class="row">
 				<div class="col-md-10 offset-md-1">
 					<div class="my-card mt-0">
-<h1 class="text-center">THIS IS <span th:text="${user.name}"></span> Profile</h1>
-	<div class="my-card mt-0">
-						<div class="container text-center">
-									<img src="" style="height:300px; width:300px " class="myprofile" th:src="@{'/img/'+${user.image}}"  alt="Pic"/>
-						<h3 class="mt-1" th:text="${user.name}"></h3>
+						<h1 class="text-center">
+							THIS IS <span th:text="${user.name}"></span> Profile
+						</h1>
+						<div class="my-card mt-0">
+							<div class="container text-center">
+								<img src="" style="height: 300px; width: 300px"
+									class="myprofile" th:src="@{'/img/'+${user.image}}" alt="Pic" />
+								<h3 class="mt-1" th:text="${user.name}"></h3>
+							</div>
+
+							<table class="table table-borderless table-dark">
+								<thead>
+									<tr>
+										<th scope="col">#ID</th>
+										<th scope="col">SBUSER<span th:text="${user.id}"></span></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th scope="row">Email</th>
+										<td><span th:text="${user.email}"></span></td>
+									</tr>
+								</tbody>
+							</table>
+
+							<div class="descr text-center">
+								<th:block th:utext="${user.about}"></th:block>
+							</div>
 						</div>
-						
-						<table class="table table-borderless table-dark">
-  <thead>
-    <tr>
-      <th scope="col">#ID</th>
-      <th scope="col">SBUSER<span th:text="${user.id}"></span></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Email</th>
-      <td><span th:text="${user.email}"></span></td>
-    </tr>
-    
-    
-    
-  </tbody>
-</table>
-
-
-  <div class="descr text-center">
-  <th:block th:utext="${user.about}"></th:block>
-  </div>
-					</div>
 
 					</div>
 				</div>
 			</div>
 		</div>
-
 
 	</section>
 

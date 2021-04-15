@@ -12,8 +12,10 @@
 				<div class="col-md-10 offset-md-1">
 					<div class="my-card mt-0">
 						<h1 class="text-center">ADD FRIENDS HERE!</h1>
+						
+		<!-- ----------------------------------------------------------------- -->
 						<form action="#" th:object="${friends}"
-							 enctype="multipart/form-data" method="POST"
+							enctype="multipart/form-data" method="POST"
 							th:action="@{/user/processfrns}" class="mt-2">
 
 							<div class="input-group mt-2">
@@ -22,8 +24,9 @@
 										<i class="fa fa-plus"></i>
 									</div>
 								</div>
-								<input type="text" id="firstname" name="name" required="required"
-									placeholder="Enter Name" class="form-control">
+								<input type="text" id="firstname" name="name"
+									required="required" placeholder="Enter Name"
+									class="form-control">
 							</div>
 
 							<div class="input-group mt-2">
@@ -32,8 +35,9 @@
 										<i class="fas fa-user-alt"></i>
 									</div>
 								</div>
-								<input type="text" id="secondName" name="secondName" required="required"
-									placeholder="Enter Nick Name" class="form-control">
+								<input type="text" id="secondName" name="secondName"
+									required="required" placeholder="Enter Nick Name"
+									class="form-control">
 							</div>
 
 							<div class="input-group mt-2">
@@ -52,8 +56,9 @@
 										<i class="fa fa-address-card"></i>
 									</div>
 								</div>
-								<input type="text" id="address" name="address" required="required"
-									placeholder="Enter Address" class="form-control">
+								<input type="text" id="address" name="address"
+									required="required" placeholder="Enter Address"
+									class="form-control">
 							</div>
 
 							<div class="input-group mt-2">
@@ -90,6 +95,8 @@
 							</div>
 
 						</form>
+				<!-- ----------------------------------------------------------------- -->
+				
 					</div>
 				</div>
 			</div>

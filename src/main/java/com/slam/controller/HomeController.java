@@ -28,111 +28,100 @@ import com.slam.dao.UserRepository;
 import com.slam.helper.*;
 import com.slam.model.User;
 
-@Controller  //indicates that the annotated class is a controller/ It marks a class as a web request handler.
+@Controller
 public class HomeController {
-	
-	@Autowired		//enbl us to inject objct dependency implicity
+
+	@Autowired
 	private BCryptPasswordEncoder PasswordEncoder;
-	
-	//to get  the object
-	@Autowired // the spring container auto-wires the bean by matching data-type.
+
+	@Autowired
 	private UserRepository userRepository;
+
 	/*
 	 * for testing
+	 * 
 	 * @Autowired private UserRepository userRepository;
 	 * 
 	 * @GetMapping("/test")
 	 * 
-	 * @ResponseBody public String test() { 
-	 * //creating object for user
-	 * User user=new User();
-	 * user.setName("AMAN"); 
-	 * user.setEmail("guraman@gmail.com");
-	 * userRepository.save(user);  //to save single entity
-	 *  return "Working"; }
+	 * @ResponseBody public String test() { //creating object for user User user=new
+	 * User(); user.setName("AMAN"); user.setEmail("guraman@gmail.com");
+	 * userRepository.save(user); //to save single entity return "Working"; }
 	 */
-	@RequestMapping("/") 	//used for mapping web reqst onto handler method in reqst hndling classes /mthds
-		public String home(Model model)				//attributes used for rendering views
-		{
-			model.addAttribute("title","Home - Slam Book");
-			return "home";
-		}
-	@RequestMapping("/about") //By default, it returns a string that indicates which route to redirect
-	public String about(Model model)
+	@RequestMapping("/")
+	public String home(Model model) // attributes used for rendering views
 	{
-		model.addAttribute("title","About - Slam Book");
+		model.addAttribute("title", "Home - Slam Book");
+		return "home";
+	}
+
+	@RequestMapping("/about")
+	public String about(Model model) {
+		model.addAttribute("title", "About - Slam Book");
 		return "about";
 	}
-	//for sign up page
+
+	// for sign up page
 	@RequestMapping("/signup")
-	public String signup(Model model)
-	{
-		model.addAttribute("title","SignUp - Slam Book");
-		model.addAttribute("user",new User());
+	public String signup(Model model) {
+		model.addAttribute("title", "SignUp - Slam Book");
+		model.addAttribute("user", new User());
 		return "signup";
 	}
-	
-	//handler for rgstrng user
-	@RequestMapping(value="/do_register",method=RequestMethod.POST ) 
-	public String registerUser(@Valid @ModelAttribute("user") User user, //map a form's inputs to a bean & bean used is validated
-			BindingResult result1,
-			@RequestParam("profileimage") MultipartFile file, 
-			Model model,
-			HttpSession session)
+
+	// handler for Registering user
+	@RequestMapping(value = "/do_register", method = RequestMethod.POST)
+	public String registerUser(@Valid @ModelAttribute("user") User user, // map a form's inputs to a bean & bean used is
+																			// validated
+			BindingResult result1, @RequestParam("profileimage") MultipartFile file, Model model, HttpSession session)
 
 	{
-		try
-		{
-			
-			if (result1.hasErrors()) /* srvr side vldtn */
+		try {
+
+			if (result1.hasErrors()) // ServerSide Validation
 			{
-				System.out.println("ERROR"+result1.toString());
-				model.addAttribute("user",user);
+				System.out.println("ERROR" + result1.toString());
+				model.addAttribute("user", user);
 				return "signup";
 			}
 			user.setRole("ROLE_USER");
 			user.setEnabled(true);
 			user.setPassword(PasswordEncoder.encode(user.getPassword()));
 
-			//----------------------Processing and uploading file
-			if(file.isEmpty())
-			{
-				//if file is empty thn giv this mesg
+			// ----------------------Processing and uploading file
+			if (file.isEmpty()) {
+				// if file is empty than give this mesg
 				System.out.println("Error in uploading image");
-				
-			}
-			else {
-				// move file to folder and updt name to user table
+
+			} else {
+				// move file to folder and update name to user table
 				user.setImage(file.getOriginalFilename());
-				File saveFile=new ClassPathResource("static/img").getFile();
-				Path path=Paths.get(saveFile.getAbsolutePath()+File.separator+file.getOriginalFilename());
-				Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING); //static mthd
+				File saveFile = new ClassPathResource("static/img").getFile();
+				Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + file.getOriginalFilename());
+				Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING); // static method
 				System.out.println("Image Uploaded");
 			}
-			
-			//--------------------
-			System.out.println("User:" +user);
-			
 
-			
+			// --------------------
+			System.out.println("User:" + user);
+
 			User result = this.userRepository.save(user);
-			model.addAttribute("user",new User()); //scsfly done h to new user crt hojye blank detls ajygi
+			model.addAttribute("user", new User());
 			// message class from helper defining content and type
-			session.setAttribute("message", new Message("SUCCESSFULLY REGISTERED","alert-success"));
-		 	return "signup";
-		}
-		catch (Exception e) {
+			session.setAttribute("message", new Message("SUCCESSFULLY REGISTERED", "alert-success"));
+			return "signup";
+		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("user", "user"); /* jo b user dtl dli thi vo ajygi */
-			session.setAttribute("message", new Message("Something went wrong"+e.getMessage(), "alert-danger"));
-		 	return "signup";
+			model.addAttribute("user", "user");
+			session.setAttribute("message", new Message("Something went wrong" + e.getMessage(), "alert-danger"));
+			return "signup";
 		}
 	}
+
 	/* handler for our user login */
-	@GetMapping("/loginto") //url to opn login page
-	public String ourLogin(Model model)
-	{
-		model.addAttribute("title","Login - Slam Book");
+	@GetMapping("/loginto") // url to opn login page
+	public String ourLogin(Model model) {
+		model.addAttribute("title", "Login - Slam Book");
 		return "login";
-		}
+	}
 }

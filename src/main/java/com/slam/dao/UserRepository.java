@@ -6,9 +6,8 @@ import org.springframework.data.repository.query.Param;
 
 import com.slam.model.User;
 
-public interface UserRepository extends JpaRepository<User, Integer>  //type of data need is user and type of id is integer
-{  
-	//parameterized jpql query
-	@Query("select u from User u where u.email= :email") /* dynamic email lana h  */
-	public User getUserByUserEmail(@Param("email") String email); /* param use kr k bind kra  dynmc eml */
+public interface UserRepository extends JpaRepository<User, Integer> {
+	// parameterized jpql query
+	@Query("select u from User u where u.email= :email")
+	public User getUserByUserEmail(@Param("email") String email);
 }

@@ -11,64 +11,88 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 offset-md-3">
-					<div class="my-card mt-1"> 
-					<!--final rslt  mesg show ho  -->
-<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert"> <!-- msg ka cntnt typ -->
-		<p class="text-center" th:text="${session.message.content}"></p> <!-- msg ka cntnt  -->
-		<th:block th:text="${#session.removeAttribute('message')}"></th:block></div> <!-- //1 hi br dikhe -->
-		
+					<div class="my-card mt-1">
+						<!--final rslt  mesg showed -->
+						<div th:if="${session.message}"
+							th:classappend="${session.message.type}" class="alert"
+							role="alert">
+							<!-- mesg cntnt typ -->
+							<p class="text-center" th:text="${session.message.content}"></p>
+							<!-- mesg cntnt  -->
+							<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+						</div>
 						<div class="container text-center">
 							<img class="mx-auto" style="width: 40px" alt="" src=""
 								th:src="@{/img/icon.jpg}">
 						</div>
 						<h1 class="text-center">SIGN UP HERE!</h1>
-<form novalidate="novalidate" enctype="multipart/form-data" th:action="@{/do_register}" method="post" th:object="${user}"> <!-- user vrbl  -->
+			<!-- ----------------------------------------------------------------- -->
+						<form novalidate="novalidate" enctype="multipart/form-data"
+							th:action="@{/do_register}" method="post" th:object="${user}">
+							<!-- user variable  -->
 							<div class="mb-3">
 								<label for="name_filed" class="form-label">Your Name</label> <input
-									name="name" type="text" class="form-control" th:classappend="${#fields.hasErrors('name')? 'is-invalid':''}" id="name_filed"
+									name="name" type="text" class="form-control"
+									th:classappend="${#fields.hasErrors('name')? 'is-invalid':''}"
+									id="name_filed" aria-describedby="emailHelp"
+									placeholder="Enter here" required="required"
+									th:value="${user.name}">
+								<div class="invalid-feedback"
+									th:each="e: ${#fields.errors('name')}" th:text="${e}"></div>
+
+								<br> <label for="email_filed" class="form-label">Your
+									Email</label> <input name="email" type="email" class="form-control"
+									th:classappend="${#fields.hasErrors('email')? 'is-invalid':''}"
+									id="email_filed" aria-describedby="emailHelp"
+									placeholder="Enter here" required="required"
+									th:value="${user.email}">
+								<div class="invalid-feedback"
+									th:each="e: ${#fields.errors('email')}" th:text="${e}"></div>
+
+								<br> <label for="password_filed" class="form-label">Your
+									password</label> <input name="password" type="password"
+									class="form-control" id="password_filed"
 									aria-describedby="emailHelp" placeholder="Enter here"
-									required="required" th:value="${user.name}"> <!-- //user me name bhja h to autmcly dikhne lgega -->
-				<div class="invalid-feedback" th:each="e: ${#fields.errors('name')}" th:text="${e}"></div>
-									 <br>
-								<label for="email_filed" class="form-label">Your Email</label> <input
-									name="email" type="email" class="form-control" th:classappend="${#fields.hasErrors('email')? 'is-invalid':''}" id="email_filed"
-									aria-describedby="emailHelp" placeholder="Enter here"
-									required="required" th:value="${user.email}"> 
-									<div class="invalid-feedback" th:each="e: ${#fields.errors('email')}" th:text="${e}"></div>
-									<br>
-								<label for="password_filed" class="form-label">Your password</label> <input name="password" type="password"
-							class="form-control" id="password_filed"
-									aria-describedby="emailHelp" placeholder="Enter here"
-									required="required"> 
-									<br>
-									
-								<div class="form-group"><textarea name="about" th:text="${user.about}"
+									required="required"> <br>
+
+								<div class="form-group">
+									<textarea name="about" th:text="${user.about}"
 										placeholder="Enter someting about yourself" rows="2" cols="30"
 										class="form-control" th:value="${user.about}"></textarea>
 								</div>
+
 								<br>
-		<div class="form-group"> <input type="file" name="profileimage"></div>
-<br>
+								<div class="form-group">
+									<input type="file" name="profileimage">
+								</div>
+								<br>
+
 								<div class="form-group form-check">
-									<input type="checkbox" name="enabled"
-										class="form-check-input" th:classappend="${#fields.hasErrors('enabled')? 'is-invalid':''}"  id="enabled" /> <label
-										for="enabled">Accept terms and conditions</label>
-										
-											<div class="invalid-feedback" th:each="e: ${#fields.errors('enabled')}" th:text="${e}"></div>
-									 <br>
+									<input type="checkbox" name="enabled" class="form-check-input"
+										th:classappend="${#fields.hasErrors('enabled')? 'is-invalid':''}"
+										id="enabled" /> <label for="enabled">Accept terms and
+										conditions</label>
+
+									<div class="invalid-feedback"
+										th:each="e: ${#fields.errors('enabled')}" th:text="${e}">
+									</div>
+
+									<br>
 								</div>
 								<br>
 								<div class="container text-center">
 									<button type="submit" class="btn bg-primary text-white">Submit</button>
 									<button type="reset" class="btn btn-warning text-white">Reset</button>
 								</div>
+
 								<bR>
-								
-								   <div class="container text-center">
-       <strong><a th:href="@{/loginto}">If Already Register Click to login</a></strong> 
-        </div>
+								<div class="container text-center">
+									<strong><a th:href="@{/loginto}">If Already
+											Register Click to login</a></strong>
+								</div>
 							</div>
 						</form>
+				<!-- ----------------------------------------------------------------- -->
 					</div>
 				</div>
 			</div>
